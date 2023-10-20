@@ -18,7 +18,7 @@ app = dash.Dash(__name__)
 
 # Layout do dashboard
 app.layout = html.Div([
-    html.H1("Dashboard de Divergências", style={'text-align': 'center', 'text-transform': 'uppercase'}),
+    html.H1("Dashboard de Divergências", style={'textAlign': 'center', 'textTransform': 'uppercase'}),
 
     # Filtros
     html.Div([
@@ -26,14 +26,23 @@ app.layout = html.Div([
             id='filtro-auditor',
             options=[{'label': auditor, 'value': auditor} for auditor in df['AUDITOR'].unique()],
             multi=True,
-            value=[]
+            value=[],
+            style={'width': '40%'}  # Largura definida em 40%
         ),
         dcc.Dropdown(
             id='filtro-ga',
             options=[{'label': ga, 'value': ga} for ga in df['GA'].unique()],
             multi=True,
-            value=[]
+            value=[],
+            style={'width': '40%'}  # Largura definida em 40%
         ),
+        dcc.Dropdown(
+            id='filtro-semana',
+            options=[{'label': semana, 'value': semana} for semana in df['SEMANAS'].unique()],
+            multi=True,
+            value=[],
+            style={'width': '40%'}  # Largura definida em 40%
+        )
     ]),
 
     # Gráfico das semanas com mais divergências
@@ -62,9 +71,9 @@ def criar_grafico_barras(data, x, y, title):
      Output('grafico-itens', 'figure')],
     [Input('filtro-auditor', 'value'),
      Input('filtro-ga', 'value'),
-     Input('grafico-semanas', 'relayoutData')]  # Adicionamos a entrada para a seleção interativa
+     Input('filtro-semana', 'value')]
 )
-def update_graficos(filtros_auditor, filtros_ga, relayoutData):
+def update_graficos(filtros_auditor, filtros_ga, filtros_semana):
     df_filtrado = df_com_divergencia
 
     if filtros_auditor:
@@ -73,26 +82,18 @@ def update_graficos(filtros_auditor, filtros_ga, relayoutData):
     if filtros_ga:
         df_filtrado = df_filtrado[df_filtrado['GA'].isin(filtros_ga)]
 
-    # Verifica se houve uma seleção no gráfico de semanas
-    if relayoutData and 'xaxis.range[0]' in relayoutData:
-        x_min = relayoutData['xaxis.range[0]']
-        x_max = relayoutData['xaxis.range[1]']
-        # Filtra o DataFrame com base na seleção no gráfico de semanas
-        df_filtrado = df_filtrado[(df_filtrado['SEMANAS'] >= x_min) & (df_filtrado['SEMANAS'] <= x_max)]
+    if filtros_semana:
+        df_filtrado = df_filtrado[df_filtrado['SEMANAS'].isin(filtros_semana)]
 
-    # Contagem de divergências por semana
     contagem_semanas = df_filtrado['SEMANAS'].value_counts().reset_index()
     contagem_semanas.columns = ['Semana', 'Contagem']
 
-    # Contagem de divergências por dia da semana
     contagem_dias_semana = df_filtrado['DIA DA SEMANA'].value_counts().reset_index()
     contagem_dias_semana.columns = ['Dia da Semana', 'Contagem']
 
-    # Contagem de divergências por unidades
     contagem_unidades = df_filtrado['Unidades 33/Ciclica Padrão'].value_counts().reset_index()
     contagem_unidades.columns = ['Unidades', 'Contagem']
 
-    # Contagem de divergências por itens
     contagem_itens = df_filtrado['ITEM'].value_counts().reset_index().head(5)
     contagem_itens.columns = ['Item', 'Contagem']
 
