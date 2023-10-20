@@ -65,3 +65,4 @@ validators==0.18.1
 watchdog==3.0.0
 Werkzeug==2.2.3
 zipp==3.6.0
+gunicorn==20.1.1
