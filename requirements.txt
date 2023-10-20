@@ -17,10 +17,10 @@ Flask==2.2.5
 gitdb==4.0.10
 GitPython==3.1.40
 idna==3.4
-importlib-metadata==6.7.0
+importlib-metadata==4.0.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
-jsonschema==4.19.1
+jsonschema==4.1.0
 jsonschema-specifications==2023.7.1
 markdown-it-py==3.0.0
 MarkupSafe==2.1.3
