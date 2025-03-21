@@ -1,0 +1,47 @@
+
+\\192.168.254.2\departamentos$\Auditoria
+SENHA IMPRESSORA = 47831
+
+IG64PLG61IV6HY7J
+192.168.254.132
+usuário: postgres 
+senha: DcMSoUfZk-uIZnXPBT5G
+base : emsys_dev
+
+cd gui-inspect-tool
+.\Inspect.exe
+
+gancho do webhook
+http://192.168.1.8:5000/chatbot/webhook/
+http://192.168.1.8:5000/chatbot/webhook/
+http://10.99.16.107:5000/chatbot/webhook/
+http://10.66.0.186:5000/chatbot/webhook/
+
+django
+python manage.py migrate
+python manage.py runserver
+http://127.0.0.1:8000/admin/
+
+git status
+git add .
+git commit -m "mensagem"
+git commit -m "Adiciona teste.html e modifica KanbanView para teste"
+git push
+git push origin main
+
+
+subir do pc para o github
+cd navega na pasta da raiz do projeto
+- git init
+- Manualmente cria repositorio no github
+- git add .
+- git commit -m "Primeiro commit: projeto captacao_leads_playwright"
+git remote add origin https://github.com/Ayreslog/whatsapp_ai_chatbot_backup.git
+git remote -v
+git remote set-url origin https://github.com/Ayreslog/captacao_leads_playwright.git
+git push -u origin main
+
+postgree
+= Odbc.DataSource("Driver={PostgreSQL ANSI(x64)};Server=10.7.16.252;Port=5432;Database=simplifica;", [HierarchicalNavigation=true])
+Driver={PostgreSQL ANSI(x64)};Server=10.7.16.252;Port=5432;Database=simplifica;
+dsn nenhum
